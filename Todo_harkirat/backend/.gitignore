@@ -1,0 +1,36 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Debug
+.vscode/
+.idea/
+
+# Build output (if using TypeScript or transpilation)
+dist/
+build/
+
+# Coverage reports
+coverage/
+
+# npm lockfile (optional — include only one: package-lock.json OR yarn.lock)
+yarn.lock
+# Or ignore this instead if using yarn:
+# package-lock.json
+
+# Temporary files
+*.swp
+*.swo
