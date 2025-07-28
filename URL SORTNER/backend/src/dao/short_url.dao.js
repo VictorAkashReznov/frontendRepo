@@ -1,16 +1,26 @@
 // data object access
 import shortUrl from "../models/shorturl.model.js";
 
-export const safe_short_url = async (orignal_url, short_url, User) => {
-  let urlObj = new shortUrl({
-    orignal_url: orignal_url,
-    short_url: short_url,
-  });
+import { ConflictError } from "../utils/errorHandler.utils.js";
 
-  if (User) {
-    urlObj.user = User;
+export const safe_short_url = async (orignal_url, short_url, User) => {
+  try {
+    let urlObj = new shortUrl({
+      orignal_url: orignal_url,
+      short_url: short_url,
+    });
+
+    if (User) {
+      urlObj.user = User;
+    }
+    return await urlObj.save();
+  } catch (error) {
+    if (error.code == 1100) {
+      throw new ConflictError("short url already exists");
+    } else {
+      throw error;
+    }
   }
-  return await urlObj.save();
 };
 
 export const getShortUrl = async (id) => {
